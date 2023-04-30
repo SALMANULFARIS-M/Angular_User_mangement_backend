@@ -26,7 +26,7 @@ const verifyLogin = async (req, res, next) => {
         if (passwordCheck) {
           const token = await jwt.sign(
             { user_id: userData._id, type: "admin" },
-            "secret_key",
+            process.env.SECRET_KEY,
             {
               expiresIn: "2d",
             }
@@ -103,7 +103,6 @@ const editUser = async (req, res) => {
           },
         }
       );
-      console.log(req.file);
       if (req.file) {
         const image = req.file.filename;
         const imagePath = path.join(__dirname, "../public/images", image.image);
@@ -165,7 +164,7 @@ const getAdmin = async (req, res, next) => {
       return res.status(400).json({ message: "Token not provided" });
     }
     const token = authHeader.slice(6);
-    const decodedToken = jwt.verify(token, "secret_key");
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     const adminId = decodedToken.user_id;
     const adminData = await User.findById(adminId);
     if (adminData) {

@@ -73,7 +73,7 @@ const verifyLogin = async (req, res, next) => {
       if (passwordCheck) {
         const token = await jwt.sign(
           { user_id: userData._id, type: "user" },
-          "secret_key",
+          process.env.SECRET_KEY,
           {
             expiresIn: "2d",
           }
@@ -104,7 +104,7 @@ const getUser = async (req, res, next) => {
       return res.status(400).json({ message: "Token not provided" });
     }
     const token = authHeader.slice(6);
-    const decodedToken = jwt.verify(token, "secret_key");
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decodedToken.user_id;
     const userData = await User.findById(userId);
     if (userData) {
