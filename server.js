@@ -16,7 +16,6 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, "public/images/")));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -30,7 +29,7 @@ mongoose
   })
   .then(() => {
     app.listen(process.env.PORT, () => {
-      console.log("Database connected and Working On " + process.env.PORT);
+      console.log("Database connected and Working On" + process.env.PORT);
     });
   })
   .catch((err) => {
