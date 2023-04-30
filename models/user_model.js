@@ -1,4 +1,4 @@
-const { stringify } = require("circular-json");
+
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required:true,
+    required:true
   },
   is_admin:{
     type:Boolean,
